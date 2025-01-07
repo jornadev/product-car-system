@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/carrinho_virtual";
+    private static final String URL = "jdbc:mysql://localhost:3306/product_cart";
     private static final String user = "root";
     private static final String password = "1203";
 
