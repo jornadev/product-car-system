@@ -12,7 +12,7 @@ public class StockDAO {
         String sql = "INSERT INTO stock (name, category, price, quantity) VALUES (?, ?, ?, ?)";
 
         try(Connection conn = DatabaseConnection.createConnectionToMySQL();
-        PreparedStatement stmt = conn.prepareStatement(sql){
+        PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getCategory());
@@ -23,7 +23,24 @@ public class StockDAO {
         } catch (SQLException e){
             System.out.println("error inserting stock");
         }
-
-
     }
+
+    public void updateQuantity(int produtoId, int novaQuantidade) throws Exception {
+        String sql = "UPDATE product_stock SET quantity = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, novaQuantidade);
+            stmt.setInt(2, produtoId);
+
+            stmt.executeUpdate();
+            System.out.println("uptade quantity!");
+
+        } catch (SQLException e) {
+            System.out.println("error updating quantity");
+        }
+    }
+
+    
 }
