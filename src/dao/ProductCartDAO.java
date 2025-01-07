@@ -41,9 +41,20 @@ public class ProductCartDAO {
         } catch (SQLException e) {
             System.out.println("erro ao atualiuzar a quantidade do produto");
         }
-
-
-
     }
+
+    public void removeProduct(Product product) throws Exception {
+        String sql = "DELETE FROM product_cart WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+                PreparedStatement stmt = conn.prepareStatement(sql)){
+                     stmt.setInt(1, product.getId());
+                     stmt.executeUpdate();
+                     System.out.println("produto excluido!");
+        } catch (SQLException e) {
+            System.out.println("erro ao excluir o produto");
+        }
+    }
+
 
 }
