@@ -1,6 +1,6 @@
-package aplicacao;
+package application;
 
-public class Programa {
+public class Program {
     public static void main(String[] args) {
 
     }
