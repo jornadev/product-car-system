@@ -24,11 +24,26 @@ public class ProductCartDAO {
             System.out.println("produto adicionado ao carrinho!");
 
         } catch (SQLException e) {
-            System.out.println("Erro ao adicionar o produto ao carrinho: " + e.getMessage());
+            System.out.println("Erro ao adicionar o produto ao carrinho");
         }
 
     }
 
-    
+    public void editProductQuantity(Product product) throws Exception {
+        String sql = "UPDATE product_cart SET quantity = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+                 stmt.setInt(1, product.getQuantity());
+                 stmt.setInt(2, product.getId());
+                 stmt.executeUpdate();
+                 System.out.println("quantidade atualizada!");
+        } catch (SQLException e) {
+            System.out.println("erro ao atualiuzar a quantidade do produto");
+        }
+
+
+
+    }
 
 }
