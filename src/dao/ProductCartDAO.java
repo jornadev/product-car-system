@@ -57,8 +57,6 @@ public class ProductCartDAO {
     }
 
     public void totalValue()  {
-        String sql = "SELECT SUM(price * quantity) AS total FROM product_cart";
-        double total = 0;
 
     }
 

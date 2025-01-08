@@ -25,14 +25,14 @@ public class StockDAO {
         }
     }
 
-    public void updateQuantity(int produtoId, int novaQuantidade) throws Exception {
+    public void updateQuantity(int id, int newQuantity) throws Exception {
         String sql = "UPDATE product_stock SET quantity = ? WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.createConnectionToMySQL();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, novaQuantidade);
-            stmt.setInt(2, produtoId);
+            stmt.setInt(1, newQuantity);
+            stmt.setInt(2, id);
 
             stmt.executeUpdate();
             System.out.println("uptade quantity!");
@@ -42,5 +42,21 @@ public class StockDAO {
         }
     }
 
-    
+    public void removeProductOnStock(int id) throws Exception {
+        String sql = "DELETE FROM stock WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            System.out.println("product removed");
+        } catch (SQLException e) {
+            System.out.println("error removing product");
+        }
+
+        
+    }
+
+
 }
