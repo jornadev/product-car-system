@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductCartDAO {
 
@@ -79,6 +81,33 @@ public class ProductCartDAO {
 
         return totalValue;
     }
+
+    public List<Product> getProductsFromCart() throws Exception {
+        String sql = "SELECT * FROM product_cart";
+        List<Product> products = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String category = rs.getString("category");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+
+                Product product = new Product(id, name, category, price, quantity);
+                products.add(product);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("error retrieving products from cart");
+        }
+
+        return products;
+    }
+
 }
 
 
