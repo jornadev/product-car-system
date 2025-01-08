@@ -5,6 +5,7 @@ import models.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StockDAO {
@@ -54,9 +55,35 @@ public class StockDAO {
         } catch (SQLException e) {
             System.out.println("error removing product");
         }
-
-        
     }
 
+    public void listProductsOnStock() throws Exception {
+        String sql = "SELECT * FROM stock";
 
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()){
+
+             System.out.println("products on stock:");
+             System.out.println("--------------------------------------------------------");
+             System.out.printf("%-4s %-15s %-15s %-10s %-10s%n", "ID", "name", "category", "price", "quantity");
+             System.out.println("--------------------------------------------------------");
+
+             while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String category = rs.getString("category");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+
+                System.out.printf("%-4d %-15s %-15s %-10.2f %-10d%n", id, name, category, price, quantity);
+             }
+                System.out.println("--------------------------------------------------------");
+
+        } catch (SQLException e) {
+            System.out.println("error listing products");
+
+
+        }
+    }
 }

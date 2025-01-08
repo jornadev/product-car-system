@@ -1,5 +1,7 @@
 package application;
 
+import dao.StockDAO;
+
 import java.util.Scanner;
 
 public class Program {
@@ -11,6 +13,9 @@ public class Program {
         System.out.println();
 
         Scanner sc = new Scanner(System.in);
+
+        StockDAO stockDAO = new StockDAO();
+        stockDAO.listProductsOnStock();
 
 
 
