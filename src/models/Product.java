@@ -22,6 +22,10 @@ public class Product {
         return id;
     }
 
+    public int setid(int id) {
+        this.id = id;
+    }
+
     public int getQuantity() {
         return quantity;
     }
