@@ -5,6 +5,7 @@ import models.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductCartDAO {
@@ -56,9 +57,29 @@ public class ProductCartDAO {
         }
     }
 
-    public void totalValue()  {
+    public double calculateTotalCartValue() throws Exception {
+        String sql = "SELECT price, quantity FROM product_cart";
+        double totalValue = 0.0;
 
+        try (Connection conn = DatabaseConnection.createConnectionToMySQL();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                totalValue += price * quantity;
+            }
+
+            System.out.println("total cart value: " + totalValue);
+
+        } catch (SQLException e) {
+            System.out.println("error calculating total cart value" );
+        }
+
+        return totalValue;
     }
-
-
 }
+
+
+

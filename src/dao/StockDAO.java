@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StockDAO {
     public void insertProductOnStock(Product product) throws Exception {
@@ -27,7 +29,7 @@ public class StockDAO {
     }
 
     public void updateQuantity(int id, int newQuantity) throws Exception {
-        String sql = "UPDATE product_stock SET quantity = ? WHERE id = ?";
+        String sql = "UPDATE stock SET quantity = ? WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.createConnectionToMySQL();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -59,31 +61,41 @@ public class StockDAO {
 
     public void listProductsOnStock() throws Exception {
         String sql = "SELECT * FROM stock";
+        List<Product> products = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.createConnectionToMySQL();
              PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()){
+             ResultSet rs = stmt.executeQuery()) {
 
-             System.out.println("products on stock:");
-             System.out.println("--------------------------------------------------------");
-             System.out.printf("%-4s %-15s %-15s %-10s %-10s%n", "ID", "name", "category", "price", "quantity");
-             System.out.println("--------------------------------------------------------");
-
-             while (rs.next()) {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String category = rs.getString("category");
                 double price = rs.getDouble("price");
                 int quantity = rs.getInt("quantity");
 
-                System.out.printf("%-4d %-15s %-15s %-10.2f %-10d%n", id, name, category, price, quantity);
-             }
-                System.out.println("--------------------------------------------------------");
+                Product product = new Product(id, name, category, price, quantity);
+                products.add(product);
+            }
+
+            System.out.println("products on stock:");
+            System.out.println("--------------------------------------------------------");
+            System.out.printf("%-4s %-15s %-15s %-10s %-10s%n", "ID", "name", "category", "price", "quantity");
+            System.out.println("--------------------------------------------------------");
+
+            for (Product product : products) {
+                System.out.printf("%-4d %-15s %-15s %-10.2f %-10d%n",
+                        product.getId(), product.getName(), product.getCategory(),
+                        product.getPrice(), product.getQuantity());
+            }
+
+            System.out.println("--------------------------------------------------------");
 
         } catch (SQLException e) {
             System.out.println("error listing products");
-
-
+            e.printStackTrace();
         }
     }
+
+
 }
