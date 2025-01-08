@@ -59,7 +59,7 @@ public class StockDAO {
         }
     }
 
-    public void listProductsOnStock() throws Exception {
+    public List<Product> listProductsOnStock() throws Exception {
         String sql = "SELECT * FROM stock";
         List<Product> products = new ArrayList<>();
 
@@ -78,24 +78,14 @@ public class StockDAO {
                 products.add(product);
             }
 
-            System.out.println("products on stock:");
-            System.out.println("--------------------------------------------------------");
-            System.out.printf("%-4s %-15s %-15s %-10s %-10s%n", "ID", "name", "category", "price", "quantity");
-            System.out.println("--------------------------------------------------------");
-
-            for (Product product : products) {
-                System.out.printf("%-4d %-15s %-15s %-10.2f %-10d%n",
-                        product.getId(), product.getName(), product.getCategory(),
-                        product.getPrice(), product.getQuantity());
-            }
-
-            System.out.println("--------------------------------------------------------");
-
         } catch (SQLException e) {
-            System.out.println("error listing products");
+            System.out.println("Error listing products");
             e.printStackTrace();
         }
+
+        return products;
     }
+
 
 
 }
