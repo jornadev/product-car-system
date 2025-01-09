@@ -29,4 +29,8 @@ public class ProductCartService {
     public double calculateTotalCartValue() throws Exception {
         return productCartDAO.calculateTotalCartValue();
     }
+
+    public List<Product> getProducts() throws Exception {
+        return productCartDAO.getProductsFromCart();
+    }
 }
