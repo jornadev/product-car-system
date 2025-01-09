@@ -97,7 +97,7 @@ public class ProductCartDAO {
                 double price = rs.getDouble("price");
                 int quantity = rs.getInt("quantity");
 
-                Product product = new Product(id, name, category, price, quantity);
+                Product product = new Product(name, category, price, quantity);
                 products.add(product);
             }
 

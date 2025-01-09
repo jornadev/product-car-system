@@ -8,7 +8,7 @@ public class StockService {
 
     private ProductCartDAO productCartDAO = new ProductCartDAO();
 
-    public void addProductToCart(Product product) throws Exception {
+    public void addProduct(Product product) throws Exception {
         productCartDAO.insertProduct(product);
     }
 
@@ -16,7 +16,7 @@ public class StockService {
         productCartDAO.editProductQuantity(product);
     }
 
-    public void removeProductFromCart(Product product) throws Exception {
+    public void removeProduct(Product product) throws Exception {
         productCartDAO.removeProduct(product);
     }
 
@@ -24,7 +24,7 @@ public class StockService {
         return productCartDAO.calculateTotalCartValue();
     }
 
-    public List<Product> getProductsInCart() throws Exception {
+    public List<Product> getProducts() throws Exception {
         return productCartDAO.getProductsFromCart();
     }
 }

@@ -10,8 +10,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String category, double price, int quantity) {
-        this.id = id;
+    public Product(String name, String category, double price, int quantity) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -22,7 +21,7 @@ public class Product {
         return id;
     }
 
-    public int setid(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -15,14 +15,14 @@ public class ProductCartService {
 
     public void updateProductQuantity(int id, int newQuantity) throws Exception {
         Product product = new Product();
-        product.setid(id);
+        product.setId(id);
         product.setQuantity(newQuantity);
         productCartDAO.editProductQuantity(product);
     }
 
     public void removeProductFromCart(int id) throws Exception {
         Product product = new Product();
-        product.setid(id);
+        product.setId(id);
         productCartDAO.removeProduct(product);
     }
 
