@@ -7,10 +7,15 @@ public class Product {
     private double price;
     private int quantity;
 
-    public Product() {
+    public Product(String name, String category, double price, int quantity) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public Product(String name, String category, double price, int quantity) {
+    public Product(int id, String name, String category, double price, int quantity) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
@@ -25,20 +30,12 @@ public class Product {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getName() {
+        return name;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCategory() {
@@ -49,20 +46,19 @@ public class Product {
         this.category = category;
     }
 
-    public String getName() {
-        return name;
+    public double getPrice() {
+        return price;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    @Override
-    public String toString(){
-        return "Product id=" + id +
-                ", name=" + name +
-                ", category=" + category +
-                ", preco=" + price +
-                ", quantidade=" + quantity;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

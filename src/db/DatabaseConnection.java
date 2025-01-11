@@ -11,17 +11,15 @@ public class DatabaseConnection {
 
     public static Connection createConnectionToMySQL() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, user, password);
-        return connection;
+        return DriverManager.getConnection(URL, user, password);
     }
 
     public static void main(String[] args) throws Exception {
-        try (Connection con = createConnectionToMySQL()){
-            if(con!= null){
-                System.out.println("conexao bem sucedidade!");
+        try (Connection con = createConnectionToMySQL()) {
+            if (con != null) {
+                System.out.println("Conexão bem-sucedida!");
                 con.close();
             }
         }
     }
-
 }
