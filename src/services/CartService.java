@@ -36,46 +36,64 @@ public class CartService {
         try {
             List<CartItem> items = cartDAO.getAllItemsInCart();
             if (items.isEmpty()) {
-                System.out.println("O carrinho está vazio.");
+                System.out.println("======================================");
+                System.out.println("        Cart is empty");
+                System.out.println("======================================");
             } else {
                 double total = 0;
+
+                System.out.println("=========================================================");
+                System.out.printf("%-20s %-10s %-15s %-15s%n", "Product", "Qtt.", "Price", "Total");
+                System.out.println("=========================================================");
+
                 for (CartItem item : items) {
-                    System.out.println("Produto: " + item.getProductName() + ", Quantidade: " + item.getQuantity() +
-                            ", Preço Unitário: " + item.getProductPrice() + ", Total: " + item.getTotalPrice());
+                    System.out.printf(
+                            "%-20s %-10d R$ %-12.2f R$ %-12.2f%n",
+                            item.getProductName(),
+                            item.getQuantity(),
+                            item.getProductPrice(),
+                            item.getTotalPrice()
+                    );
                     total += item.getTotalPrice();
                 }
-                System.out.println("Total do Carrinho: " + total);
+
+                System.out.println("==============================================================");
+                System.out.printf("%-20s %-10s %-15s R$ %-12.2f%n", "Total on Cart", "", "", total);
+                System.out.println("==============================================================");
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao listar itens do carrinho: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
+
+
     }
+
 
     public void clearCart() {
         try {
             cartDAO.clearCart();
-            System.out.println("Carrinho limpo!");
+            System.out.println("cart clear!");
         } catch (SQLException e) {
-            System.out.println("Erro ao limpar o carrinho: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
     public void updateItemQuantity(int productId, int newQuantity) {
         try {
             if (newQuantity <= 0) {
-                System.out.println("A quantidade deve ser maior que 0.");
+                System.out.println("the new quantity is less than zero!.");
                 return;
             }
 
             CartItem existingItem = cartDAO.getItemById(productId);
             if (existingItem == null) {
-                System.out.println("Produto não encontrado no carrinho.");
+                System.out.println("product not found.");
             } else {
                 cartDAO.updateItemQuantityInCart(productId, newQuantity);
-                System.out.println("Quantidade do produto no carrinho foi atualizada para " + newQuantity + ".");
+                System.out.println("quantity of product updated to: " + newQuantity + ".");
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar quantidade do item: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 }

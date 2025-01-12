@@ -20,12 +20,14 @@ public class CartView {
 
     public void manageCart() {
         while (true) {
-            System.out.println("\nGerenciamento de Carrinho:");
-            System.out.println("1. Adicionar item ao carrinho");
-            System.out.println("2. Remover item do carrinho");
-            System.out.println("3. Alterar quantidade de produto no carrinho");
-            System.out.println("4. Mostrar itens no carrinho");
-            System.out.println("5. Voltar");
+            System.out.println("///////////////////////////////////");
+            System.out.println("////        Cart Manage        ////");
+            System.out.println("///////////////////////////////////");
+            System.out.println("\n1. add item to the cart");
+            System.out.println("2. remove item from the cart");
+            System.out.println("3. update quantity item from the cart");
+            System.out.println("4. show the itens of the cart");
+            System.out.println("5. back to the main menu");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -33,9 +35,9 @@ public class CartView {
             switch (choice) {
                 case 1:
                     stockService.listAllProducts();
-                    System.out.print("Informe o ID do produto que você quer adicionar ao carrinho: ");
+                    System.out.print("ID of the product to be added: ");
                     int productId = scanner.nextInt();
-                    System.out.print("Informe a quantidade: ");
+                    System.out.print("quantity: ");
                     int quantity = scanner.nextInt();
                     scanner.nextLine();
 
@@ -43,20 +45,20 @@ public class CartView {
                     if (product != null) {
                         CartItem item = new CartItem(product.getId(), product.getName(), product.getPrice(), quantity);
                         cartService.addItemToCart(item);
-                        System.out.println("Produto adicionado ao carrinho!");
+                        System.out.println("product added to the cart");
                     } else {
-                        System.out.println("Produto não encontrado!");
+                        System.out.println("product not found");
                     }
                     break;
                 case 2:
-                    System.out.print("Informe o ID do produto para remover: ");
+                    System.out.print("ID of the product to remove: ");
                     int productIdToRemove = scanner.nextInt();
                     cartService.removeItemFromCart(productIdToRemove);
                     break;
                 case 3:
-                    System.out.print("Informe o ID do produto para alterar a quantidade: ");
+                    System.out.print("ID of product to update: ");
                     int productIdToUpdate = scanner.nextInt();
-                    System.out.print("Informe a nova quantidade: ");
+                    System.out.print("new quantity: ");
                     int newQuantity = scanner.nextInt();
                     cartService.updateItemQuantity(productIdToUpdate, newQuantity);
                     break;
@@ -66,7 +68,7 @@ public class CartView {
                 case 5:
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("invalid option");
             }
         }
     }

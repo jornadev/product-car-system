@@ -20,10 +20,13 @@ public class Program {
             StockView stockView = new StockView(stockService, scanner);
 
             while (true) {
-                System.out.println("\nEscolha uma opção:");
-                System.out.println("1. Gerenciar carrinho");
-                System.out.println("2. Gerenciar estoque");
-                System.out.println("3. Sair");
+                System.out.println("/////////////////////////////////");
+                System.out.println("///    Cart Product System    ///");
+                System.out.println("/////////////////////////////////");
+                System.out.println("\nchoice an option: ");
+                System.out.println("1. manage cart");
+                System.out.println("2. manage stock");
+                System.out.println("3. exit");
 
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -36,10 +39,10 @@ public class Program {
                         stockView.manageStock();
                         break;
                     case 3:
-                        System.out.println("Saindo...");
+                        System.out.println("exit...");
                         return;
                     default:
-                        System.out.println("Opção inválida!");
+                        System.out.println("invalid option");
                 }
             }
         } catch (Exception e) {

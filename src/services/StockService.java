@@ -17,60 +17,72 @@ public class StockService {
     public void addProductToStock(Product product) {
         try {
             stockDAO.addProduct(product);
-            System.out.println("Produto adicionado com sucesso!");
+            System.out.println("product added to stock!");
         } catch (SQLException e) {
-            System.out.println("Erro ao adicionar produto: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
     public void removeProductFromStock(int productId) {
         try {
             stockDAO.removeProduct(productId);
-            System.out.println("Produto removido com sucesso!");
+            System.out.println("product removed from stock!");
         } catch (SQLException e) {
-            System.out.println("Erro ao remover produto: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
     public void updateProductQuantity(int id, int newQuantity) {
         try {
             stockDAO.updateProductQuantity(id, newQuantity);
-            System.out.println("Quantidade de produto atualizada!");
+            System.out.println("quantity updated!");
         } catch (SQLException e) {
-            System.out.println("Erro ao atualizar quantidade: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
     public void listAllProducts() {
+
         try {
             List<Product> products = stockDAO.getAllProducts();
             if (products.isEmpty()) {
-                System.out.println("Nenhum produto encontrado no estoque.");
+                System.out.println("======================================");
+                System.out.println("          Empty Stock");
+                System.out.println("======================================");
             } else {
+                System.out.println("======================================");
+                System.out.println("         Products on Stock");
+                System.out.println("======================================");
                 for (Product product : products) {
-                    System.out.println("ID: " + product.getId() + ", Nome: " + product.getName() +
-                            ", Categoria: " + product.getCategory() + ", Preço: " + product.getPrice() +
-                            ", Quantidade: " + product.getQuantity());
+                    System.out.println("ID: " + product.getId());
+                    System.out.println("name: " + product.getName());
+                    System.out.println("category: " + product.getCategory());
+                    System.out.println("price: $ " + String.format("%.2f", product.getPrice()));
+                    System.out.println("quantity: " + product.getQuantity());
+                    System.out.println("--------------------------------------");
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao listar produtos: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
+
+
     }
+
 
     public Product getProductById(int productId) {
         try {
             Product product = stockDAO.getProductById(productId);
             if (product == null) {
-                System.out.println("Produto com ID " + productId + " não encontrado.");
+                System.out.println("product with ID " + productId + " not found.");
             } else {
-                System.out.println("ID: " + product.getId() + ", Nome: " + product.getName() +
-                        ", Categoria: " + product.getCategory() + ", Preço: " + product.getPrice() +
-                        ", Quantidade: " + product.getQuantity());
+                System.out.println("ID: " + product.getId() + ", name: " + product.getName() +
+                        ", category: " + product.getCategory() + ", price: " + product.getPrice() +
+                        ", quantity: " + product.getQuantity());
             }
             return product;
         } catch (SQLException e) {
-            System.out.println("Erro ao buscar produto: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
         return null;
     }
