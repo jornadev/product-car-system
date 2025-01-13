@@ -20,7 +20,7 @@ public class CartView {
 
     public void manageCart() {
         while (true) {
-            System.out.println("///////////////////////////////////");
+            System.out.println("\n///////////////////////////////////");
             System.out.println("////        Cart Manage        ////");
             System.out.println("///////////////////////////////////");
             System.out.println("\n1. add item to the cart");
@@ -51,6 +51,7 @@ public class CartView {
                     }
                     break;
                 case 2:
+                    cartService.listItemsInCart();
                     System.out.print("ID of the product to remove: ");
                     int productIdToRemove = scanner.nextInt();
                     cartService.removeItemFromCart(productIdToRemove);

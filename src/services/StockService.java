@@ -65,10 +65,7 @@ public class StockService {
         } catch (SQLException e) {
             System.out.println("error: " + e.getMessage());
         }
-
-
     }
-
 
     public Product getProductById(int productId) {
         try {

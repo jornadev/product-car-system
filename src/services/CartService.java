@@ -17,18 +17,18 @@ public class CartService {
     public void addItemToCart(CartItem item) {
         try {
             cartDAO.addItemToCart(item);
-            System.out.println("Item adicionado ao carrinho!");
+            System.out.println("item added to the cart!");
         } catch (SQLException e) {
-            System.out.println("Erro ao adicionar item ao carrinho: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
     public void removeItemFromCart(int productId) {
         try {
             cartDAO.removeItemFromCart(productId);
-            System.out.println("Item removido do carrinho!");
+            System.out.println("item removed from the cart!");
         } catch (SQLException e) {
-            System.out.println("Erro ao remover item do carrinho: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
@@ -42,13 +42,14 @@ public class CartService {
             } else {
                 double total = 0;
 
-                System.out.println("=========================================================");
-                System.out.printf("%-20s %-10s %-15s %-15s%n", "Product", "Qtt.", "Price", "Total");
-                System.out.println("=========================================================");
+                System.out.println("=============================================================");
+                System.out.printf("%-10s %-20s %-10s %-15s %-15s%n", "ID", "Product", "Qtt.", "Price", "Total");
+                System.out.println("=============================================================");
 
                 for (CartItem item : items) {
                     System.out.printf(
-                            "%-20s %-10d R$ %-12.2f R$ %-12.2f%n",
+                            "%-10d %-20s %-10d R$ %-12.2f R$ %-12.2f%n",
+                            item.getProductId(),
                             item.getProductName(),
                             item.getQuantity(),
                             item.getProductPrice(),
@@ -58,15 +59,14 @@ public class CartService {
                 }
 
                 System.out.println("==============================================================");
-                System.out.printf("%-20s %-10s %-15s R$ %-12.2f%n", "Total on Cart", "", "", total);
+                System.out.printf("%-10s %-20s %-10s %-15s R$ %-12.2f%n", "", "Total on Cart", "", "", total);
                 System.out.println("==============================================================");
             }
         } catch (SQLException e) {
-            System.out.println("error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
-
-
     }
+
 
 
     public void clearCart() {
