@@ -17,7 +17,7 @@ public class DatabaseConnection {
     public static void main(String[] args) throws Exception {
         try (Connection con = createConnectionToMySQL()) {
             if (con != null) {
-                System.out.println("Conexão bem-sucedida!");
+                System.out.println("connection successfully created");
                 con.close();
             }
         }

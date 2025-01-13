@@ -22,7 +22,8 @@ public class StockView {
             System.out.println("\n1. add product to stock");
             System.out.println("2. remove product from stock");
             System.out.println("3. change the informations product in stock");
-            System.out.println("4. back to main menu");
+            System.out.println("4. list products");
+            System.out.println("5. back to main menu");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -56,6 +57,9 @@ public class StockView {
                     stockService.updateProductQuantity(id, newQuantity);
                     break;
                 case 4:
+                    stockService.listAllProducts();
+                    break;
+                case 5:
                     return;
                 default:
                     System.out.println("invalid option");

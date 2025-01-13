@@ -20,7 +20,7 @@ public class Program {
             StockView stockView = new StockView(stockService, scanner);
 
             while (true) {
-                System.out.println("/////////////////////////////////");
+                System.out.println("\n/////////////////////////////////");
                 System.out.println("///    Cart Product System    ///");
                 System.out.println("/////////////////////////////////");
                 System.out.println("\nchoice an option: ");
