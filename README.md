@@ -9,7 +9,6 @@ Projeto desenvolvido em Java 17 e MySQL, o mesmo conta com funcionalides como:
 
 - Inserir, ver, deletar e atualizar itens no carrinho;
 - Inserir, ver, deletar e atualizar itens no estoque;
-- Tratamento de excecoes;
 - Intuitividade com o usuario.
 
 ## Demonstracao 
