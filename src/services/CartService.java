@@ -2,6 +2,8 @@ package services;
 
 import dao.CartDAO;
 import models.CartItem;
+import models.Product;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,15 +11,30 @@ import java.util.List;
 public class CartService {
 
     private CartDAO cartDAO;
+    private StockService stockService;
 
     public CartService(Connection connection) {
         this.cartDAO = new CartDAO(connection);
+        this.stockService = new StockService(connection);
     }
 
     public void addItemToCart(CartItem item) {
         try {
+            Product product = stockService.getProductById(item.getProductId());
+
+            if (product == null) {
+                System.out.println("product not found");
+                return;
+            }
+
+            if (item.getQuantity() > product.getQuantity()) {
+                System.out.println("quantity is greater than product quantity.");
+                return;
+            }
+
             cartDAO.addItemToCart(item);
-            System.out.println("item added to the cart!");
+            stockService.updateProductQuantity(product.getId(), product.getQuantity() - item.getQuantity());
+
         } catch (SQLException e) {
             System.out.println("error: " + e.getMessage());
         }
@@ -59,15 +76,13 @@ public class CartService {
                 }
 
                 System.out.println("==============================================================");
-                System.out.printf("%-10s %-20s %-10s %-15s R$ %-12.2f%n", "", "Total on Cart", "", "", total);
+                System.out.printf("%-10s %-20s %-10s %-15s $ %-12.2f%n", "", "Total on Cart", "", "", total);
                 System.out.println("==============================================================");
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-
 
     public void clearCart() {
         try {

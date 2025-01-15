@@ -44,11 +44,13 @@ public class StockView {
                     System.out.println("product added to stock!");
                     break;
                 case 2:
+                    stockService.listAllProducts();
                     System.out.print("ID of the product to remove: ");
                     int productId = scanner.nextInt();
                     stockService.removeProductFromStock(productId);
                     break;
                 case 3:
+                    stockService.listAllProducts();
                     System.out.print("ID of the product to update: ");
                     int id = scanner.nextInt();
                     scanner.nextLine();

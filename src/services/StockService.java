@@ -42,7 +42,6 @@ public class StockService {
     }
 
     public void listAllProducts() {
-
         try {
             List<Product> products = stockDAO.getAllProducts();
             if (products.isEmpty()) {
