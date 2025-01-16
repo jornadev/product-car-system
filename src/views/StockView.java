@@ -21,7 +21,7 @@ public class StockView {
             System.out.println("//////////////////////////////////");
             System.out.println("\n1. add product to stock");
             System.out.println("2. remove product from stock");
-            System.out.println("3. change the informations product in stock");
+            System.out.println("3. change the quantity product in stock");
             System.out.println("4. list products");
             System.out.println("5. back to main menu");
 
@@ -41,7 +41,6 @@ public class StockView {
 
                     Product product = new Product(name, category, price, quantity);
                     stockService.addProductToStock(product);
-                    System.out.println("product added to stock!");
                     break;
                 case 2:
                     stockService.listAllProducts();

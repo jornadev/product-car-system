@@ -54,7 +54,7 @@ public class CartService {
             List<CartItem> items = cartDAO.getAllItemsInCart();
             if (items.isEmpty()) {
                 System.out.println("======================================");
-                System.out.println("        Cart is empty");
+                System.out.println("           Cart is empty");
                 System.out.println("======================================");
             } else {
                 double total = 0;
@@ -80,7 +80,7 @@ public class CartService {
                 System.out.println("==============================================================");
             }
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("error: " + e.getMessage());
         }
     }
 
@@ -111,6 +111,39 @@ public class CartService {
             System.out.println("error: " + e.getMessage());
         }
     }
+    public boolean applyCoupon(String coupon) {
+        try {
+            if (coupon.equals("discount10")) {
+                double discount = 0.10;
+                List<CartItem> items = cartDAO.getAllItemsInCart();
+
+                for (CartItem item : items) {
+                    double newPrice = item.getProductPrice() * (1 - discount);
+                    item.setProductPrice(newPrice);
+                    cartDAO.updateItemPriceInCart(item.getProductId(), newPrice);
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("error applying coupon: " + e.getMessage());
+        }
+        return false;
+    }
+    public double calculateTotalPrice() {
+        double total = 0;
+        try {
+            List<CartItem> items = cartDAO.getAllItemsInCart();
+            for (CartItem item : items) {
+                total += item.getProductPrice() * item.getQuantity();
+            }
+        } catch (SQLException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        return total;
+    }
+
+
+
 }
 
 

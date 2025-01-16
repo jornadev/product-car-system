@@ -78,6 +78,15 @@ public class CartDAO {
         }
         return null;
     }
+    public void updateItemPriceInCart(int productId, double newPrice) throws SQLException {
+        String sql = "UPDATE product_cart SET price = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, newPrice);
+            stmt.setInt(2, productId);
+            stmt.executeUpdate();
+        }
+    }
+
 
 
 }

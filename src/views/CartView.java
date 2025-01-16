@@ -65,6 +65,7 @@ public class CartView {
                     break;
                 case 4:
                     cartService.listItemsInCart();
+                    cartOptionsMenu();
                     break;
                 case 5:
                     return;
@@ -73,4 +74,47 @@ public class CartView {
             }
         }
     }
+    private void cartOptionsMenu() {
+        while (true) {
+            System.out.println("\n//////////////////////////////////");
+            System.out.println("////       Cart Options       ////");
+            System.out.println("\n//////////////////////////////////");
+            System.out.println("1. add coupon");
+            System.out.println("2. finalize purchase");
+            System.out.println("3. back to cart menu");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("enter coupon code: ");
+                    String coupon = scanner.nextLine();
+                    boolean isCouponValid = cartService.applyCoupon(coupon);
+                    if (isCouponValid) {
+                        System.out.println("coupon applied!");
+                    } else {
+                        System.out.println("invalid coupon.");
+                    }
+                    break;
+                case 2:
+                    finalizePurchase();
+                    return;
+                case 3:
+                    return;
+                default:
+                    System.out.println("invalid option");
+            }
+        }
+    }
+
+    private void finalizePurchase() {
+        System.out.println("\n----------------- finalizing Purchase -----------------");
+        cartService.listItemsInCart();
+        double totalPrice = cartService.calculateTotalPrice();
+        System.out.printf("total: %.2f\n", totalPrice);
+        System.out.println("thank you for your purchase!");
+        System.exit(0);
+    }
 }
+
